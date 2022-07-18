@@ -9,6 +9,8 @@ public class PlayerController : MonoBehaviour
     Rigidbody _rigidBody;
     [SerializeField]
     private float _thrustAmt = 1000f;
+    [SerializeField]
+    private float _rotationAmt = 100f;
 
     #endregion Fields
 
@@ -39,13 +41,17 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.D))
         {
-            Debug.Log("Right");
+            ApplyRotation(-_rotationAmt);
         }
-
         else if (Input.GetKey(KeyCode.A))
         {
-            Debug.Log("Left");
+            ApplyRotation(_rotationAmt);
         }
+    }
+
+    private void ApplyRotation(float rotationAmt)
+    {
+        transform.Rotate(Vector3.forward * rotationAmt * Time.deltaTime);
     }
 
     #endregion Methods
